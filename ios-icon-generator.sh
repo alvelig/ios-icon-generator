@@ -100,6 +100,47 @@ info 'App Store Icon...'
 convert "$SRC_FILE" -resize 1024x1024 "$DST_PATH/iTunesArtwork@2x.png"
 
 info 'Generating:'
+
+
+if [ ! -d "$DST_PATH/android" ];then
+    mkdir -p "$DST_PATH/android/"
+fi
+
+if [ ! -d "$DST_PATH/android/icons" ];then
+    mkdir -p "$DST_PATH/android/icons/"
+fi
+
+if [ ! -d "$DST_PATH/android/icons/mipmap-mdpi" ];then
+    mkdir -p "$DST_PATH/android/icons/mipmap-mdpi"
+fi
+
+if [ ! -d "$DST_PATH/android/icons/mipmap-hdpi" ];then
+    mkdir -p "$DST_PATH/android/icons/mipmap-hdpi"
+fi
+
+if [ ! -d "$DST_PATH/android/icons/mipmap-xhdpi" ];then
+    mkdir -p "$DST_PATH/android/icons/mipmap-xhdpi"
+fi
+
+if [ ! -d "$DST_PATH/android/icons/mipmap-xxhdpi" ];then
+    mkdir -p "$DST_PATH/android/icons/mipmap-xxhdpi"
+fi
+
+if [ ! -d "$DST_PATH/android/icons/mipmap-xxxhdpi" ];then
+    mkdir -p "$DST_PATH/android/icons/mipmap-xxxhdpi"
+fi
+
+info 'android_mdpi icon...'
+convert "$SRC_FILE" -resize 48x48 "$DST_PATH/android/icons/mipmap-mdpi/ic_launcher.png"
+info 'android_hdpi icon...'
+convert "$SRC_FILE" -resize 72x72 "$DST_PATH/android/icons/mipmap-hdpi/ic_launcher.png"
+info 'android_xhdpi icon...'
+convert "$SRC_FILE" -resize 96x96 "$DST_PATH/android/icons/mipmap-xhdpi/ic_launcher.png"
+info 'android_xxhdpi icon...'
+convert "$SRC_FILE" -resize 144x144 "$DST_PATH/android/icons/mipmap-xxhdpi/ic_launcher.png"
+info 'android_xxxhdpi icon...'
+convert "$SRC_FILE" -resize 192x192 "$DST_PATH/android/icons/mipmap-xxxhdpi/ic_launcher.png"
+
 # Check dst path whether exist.
 if [ ! -d "$DST_PATH/AppIcon.appiconset" ];then
     mkdir -p "$DST_PATH/AppIcon.appiconset/"
@@ -301,9 +342,9 @@ if [ ! -d "$DST_PATH/LaunchImage.launchimage" ];then
 fi
 
 info 'Generating extended Default image'
-convert "$SRC_FILE" -background white -gravity center -extent 200% "$SRC_FILE.extended"
+#convert "$SRC_FILE" -background white -gravity center -extent 200% "$SRC_FILE.extended"
 
-SRC_FILE="$SRC_FILE.extended"
+SRC_FILE="$SRC_FILE"
 info "$SRC_FILE"
 
 info 'Generating Launch Screen set...'
@@ -422,5 +463,27 @@ cat <<EOF > $DST_PATH/LaunchImage.launchimage/Contents.json
   }
 }
 EOF
+
+if [ ! -d "$DST_PATH/android/splashes" ];then
+    mkdir -p "$DST_PATH/android/splashes/"
+fi
+
+info 'android_mdpi_portrait...'
+convert "$SRC_FILE" -thumbnail 320x480 -background $BGCOLOR -gravity center -extent 320x480 "$DST_PATH/android/splashes/android_mdpi_portrait.png"
+info 'android_mdpi_landscape...'
+convert "$SRC_FILE" -thumbnail 480x320 -background $BGCOLOR -gravity center -extent 480x320 "$DST_PATH/android/splashes/android_mdpi_landscape.png"
+info 'android_hdpi_portrait...'
+convert "$SRC_FILE" -thumbnail 480x800 -background $BGCOLOR -gravity center -extent 480x800 "$DST_PATH/android/splashes/android_hdpi_portrait.png"
+info 'android_hdpi_landscape...'
+convert "$SRC_FILE" -thumbnail 800x480 -background $BGCOLOR -gravity center -extent 800x480 "$DST_PATH/android/splashes/android_hdpi_landscape.png"
+info 'android_xhdpi_portrait...'
+convert "$SRC_FILE" -thumbnail 720x1280 -background $BGCOLOR -gravity center -extent 720x1280 "$DST_PATH/android/splashes/android_xhdpi_portrait.png"
+info 'android_xhdpi_landscape...'
+convert "$SRC_FILE" -thumbnail 1280x720 -background $BGCOLOR -gravity center -extent 1280x720 "$DST_PATH/android/splashes/android_xhdpi_landscape.png"
+info 'android_xxhdpi_portrait...'
+convert "$SRC_FILE" -thumbnail 1080x1440 -background $BGCOLOR -gravity center -extent 1080x1440 "$DST_PATH/android/splashes/android_xxhdpi_portrait.png"
+info 'android_xxhdpi_landscape...'
+convert "$SRC_FILE" -thumbnail 1440x1080 -background $BGCOLOR -gravity center -extent 1440x1080 "$DST_PATH/android/splashes/android_xxhdpi_landscape.png"
+
 
 info 'Generate Done.'
