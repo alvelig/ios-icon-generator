@@ -97,7 +97,7 @@ fi
 # iPad Pro, iPad, iPad mini   80px by 80px    58px by 58px
 
 info 'App Store Icon...'
-convert "$SRC_FILE" -resize 1024x1024 "$DST_PATH/iTunesArtwork@2x.png"
+convert "$SRC_FILE" -resize 1024X1024 "$DST_PATH/iTunesArtwork@2x.png"
 
 info 'Generating:'
 
@@ -146,44 +146,56 @@ if [ ! -d "$DST_PATH/AppIcon.appiconset" ];then
     mkdir -p "$DST_PATH/AppIcon.appiconset/"
 fi
 
-info 'iPhone 6s, iPhone 6, iPhone SE Icon...'
+info 'iPhone Notification Icon...'
+convert "$SRC_FILE" -resize 40x40 "$DST_PATH/AppIcon.appiconset/icon-20@2x.png"
+convert "$SRC_FILE" -resize 60x60 "$DST_PATH/AppIcon.appiconset/icon-20@3x.png"
+
+info 'iPhone Settings Icon...'
+convert "$SRC_FILE" -resize 58x58 "$DST_PATH/AppIcon.appiconset/icon-small@2x.png"
+convert "$SRC_FILE" -resize 87x87 "$DST_PATH/AppIcon.appiconset/icon-small@3x.png"
+
+info 'iPhone Spotlight Icon...'
+convert "$SRC_FILE" -resize 80x80 "$DST_PATH/AppIcon.appiconset/icon-40@2x.png"
+convert "$SRC_FILE" -resize 120x120 "$DST_PATH/AppIcon.appiconset/icon-40@3x.png"
+
+info 'iPhone App Icon...'
 convert "$SRC_FILE" -resize 120x120 "$DST_PATH/AppIcon.appiconset/icon-60@2x.png"
-info 'iPhone 6s Plus, iPhone 6 Plus Icon...'
 convert "$SRC_FILE" -resize 180x180 "$DST_PATH/AppIcon.appiconset/icon-60@3x.png"
+
+info 'iPad Notifications Icon...'
+convert "$SRC_FILE" -resize 20x20 "$DST_PATH/AppIcon.appiconset/icon-20.png"
+
+info 'iPad Settings Icon...'
+convert "$SRC_FILE" -resize 29x29 "$DST_PATH/AppIcon.appiconset/icon-small.png"
+
+info 'iPad Spotlight Icon...'
+convert "$SRC_FILE" -resize 80x80 "$DST_PATH/AppIcon.appiconset/icon-40.png"
+
+info 'iPad App Icon...'
+convert "$SRC_FILE" -resize 76x76 "$DST_PATH/AppIcon.appiconset/icon-76.png"
+convert "$SRC_FILE" -resize 152x152 "$DST_PATH/AppIcon.appiconset/icon-76@2x.png"
+
 info 'iPad Pro Icon...'
 convert "$SRC_FILE" -resize 167x167 "$DST_PATH/AppIcon.appiconset/icon-83.5@2x.png"
 
-info 'icon-76...'
-convert "$SRC_FILE" -resize 76x76 "$DST_PATH/AppIcon.appiconset/icon-76.png"
-info 'iPad, iPad mini Icon...'
-convert "$SRC_FILE" -resize 152x152 "$DST_PATH/AppIcon.appiconset/icon-76@2x.png"
+info 'App Store Icon...'
+convert "$SRC_FILE" -resize 1024x1024 "$DST_PATH/AppIcon.appiconset/AppStore.png"
 
-info 'icon-small...'
-convert "$SRC_FILE" -resize 29x29 "$DST_PATH/AppIcon.appiconset/icon-small.png"
-info 'Generate iPad Pro, iPad, iPad mini, iPhone 6s, iPhone 6, iPhone SE Settings Icon...'
-convert "$SRC_FILE" -resize 58x58 "$DST_PATH/AppIcon.appiconset/icon-small@2x.png"
 
-info 'Icon-40...'
-convert "$SRC_FILE" -resize 40x40 "$DST_PATH/AppIcon.appiconset/icon-40.png"
-info 'Generate iPad Pro, iPad, iPad mini, iPhone 6s, iPhone 6, iPhone SE Spotlight Icon...'
-convert "$SRC_FILE" -resize 80x80 "$DST_PATH/AppIcon.appiconset/icon-40@2x.png"
-
-info 'Generate iPad Pro, iPad, iPad mini, iPhone 6s, iPhone 6, iPhone SE Settings Icon...'
-convert "$SRC_FILE" -resize 87x87 "$DST_PATH/AppIcon.appiconset/icon-small@3x.png"
-info 'Generate iPad Pro, iPad, iPad mini, iPhone 6s, iPhone 6, iPhone SE Spotlight Icon...'
-convert "$SRC_FILE" -resize 120x120 "$DST_PATH/AppIcon.appiconset/icon-60@2x.png"
 
 cat <<EOF > $DST_PATH/AppIcon.appiconset/Contents.json
 {
   "images" : [
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "icon-20@2x.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "icon-20@3x.png",
       "scale" : "3x"
     },
     {
@@ -207,7 +219,7 @@ cat <<EOF > $DST_PATH/AppIcon.appiconset/Contents.json
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "icon-60@2x.png",
+      "filename" : "icon-40@3x.png",
       "scale" : "3x"
     },
     {
@@ -223,13 +235,15 @@ cat <<EOF > $DST_PATH/AppIcon.appiconset/Contents.json
       "scale" : "3x"
     },
     {
-      "idiom" : "ipad",
       "size" : "20x20",
+      "idiom" : "ipad",
+      "filename" : "icon-20.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "size" : "20x20",
+      "idiom" : "ipad",
+      "filename" : "icon-20@2x.png",
       "scale" : "2x"
     },
     {
@@ -275,58 +289,10 @@ cat <<EOF > $DST_PATH/AppIcon.appiconset/Contents.json
       "scale" : "2x"
     },
     {
-      "size" : "24x24",
-      "idiom" : "watch",
-      "scale" : "2x",
-      "role" : "notificationCenter",
-      "subtype" : "38mm"
-    },
-    {
-      "size" : "27.5x27.5",
-      "idiom" : "watch",
-      "scale" : "2x",
-      "role" : "notificationCenter",
-      "subtype" : "42mm"
-    },
-    {
-      "size" : "29x29",
-      "idiom" : "watch",
-      "role" : "companionSettings",
-      "scale" : "2x"
-    },
-    {
-      "size" : "29x29",
-      "idiom" : "watch",
-      "role" : "companionSettings",
-      "scale" : "3x"
-    },
-    {
-      "size" : "40x40",
-      "idiom" : "watch",
-      "scale" : "2x",
-      "role" : "appLauncher",
-      "subtype" : "38mm"
-    },
-    {
-      "size" : "44x44",
-      "idiom" : "watch",
-      "scale" : "2x",
-      "role" : "longLook",
-      "subtype" : "42mm"
-    },
-    {
-      "size" : "86x86",
-      "idiom" : "watch",
-      "scale" : "2x",
-      "role" : "quickLook",
-      "subtype" : "38mm"
-    },
-    {
-      "size" : "98x98",
-      "idiom" : "watch",
-      "scale" : "2x",
-      "role" : "quickLook",
-      "subtype" : "42mm"
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "AppStore.png",
+      "scale" : "1x"
     }
   ],
   "info" : {
